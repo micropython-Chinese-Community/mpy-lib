@@ -1,11 +1,11 @@
 '''
-RS: P0
-RW: P1
-E:  P2
-BK: P3
-DAT:P4-P7
+    mpy drive for I2C LCD1602
 
-www.micropython.org.cn
+    Author: shaoziyang
+    Date:   2018.2
+
+    http://www.micropython.org.cn
+
 '''
 import time
 from machine import I2C
