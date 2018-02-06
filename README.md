@@ -2,8 +2,8 @@
 
 All kinds of micropython drives, examples, libraries.
 
-* [LCD](lcd/README.md)
-* [Sensor](sensor/README.md)
+* [LCD](lcd)
+* [Sensor](sensor)
 * keyboard
 * radio
 * bluetooth
