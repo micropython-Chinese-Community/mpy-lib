@@ -2,10 +2,11 @@
 
 All kinds of micropython drives, examples, libraries.
 
-* [LCD](/lcd/README.md)
+* [LCD](lcd/README.md)
+* [Sensor](sensor/README.md)
 * keyboard
 * radio
 * bluetooth
 
-From microbit/micropython Chinese community.
-www.micropython.org.cn
+[From microbit/micropython Chinese community](www.micropython.org.cn)
+
