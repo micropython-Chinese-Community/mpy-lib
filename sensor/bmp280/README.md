@@ -1,5 +1,7 @@
 # BMP280 Digital pressure sensor
 
+![](bmp280.jpg)
+
 ## I2C Address
 
 I2C Address depend SDO, defult address is:
