@@ -6,6 +6,9 @@
 
 ## API
 
+* **get()**  
+get envirment temperature and pressure  
+
 * **getTemp()**  
 get envirment temperature 
 

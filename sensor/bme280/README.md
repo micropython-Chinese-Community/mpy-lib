@@ -14,6 +14,9 @@ When SDO is high address is:
 
 ## API
 
+* **get()**  
+get envirment temperature, pressure and humidity  
+
 * **getTemp()**  
 get envirment temperature 
 
