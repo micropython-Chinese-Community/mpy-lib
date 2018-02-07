@@ -65,4 +65,5 @@ l=mp_i2c_lcd1602.LCD1620()
 l.puts('Hello!')
 ```
 
-[From microbit/micropython Chinese community](www.micropython.org.cn)
+From microbit/micropython Chinese community.  
+www.micropython.org.cn

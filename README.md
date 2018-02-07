@@ -8,5 +8,5 @@ All kinds of micropython drives, examples, libraries.
 * radio
 * bluetooth
 
-[From microbit/micropython Chinese community](www.micropython.org.cn)
-
+From microbit/micropython Chinese community.  
+www.micropython.org.cn
