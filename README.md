@@ -4,6 +4,7 @@ All kinds of micropython drives, examples, libraries.
 
 * [LCD](lcd)
 * [Sensor](sensor)
+* [Neopixel](neopixel)
 * keyboard
 * radio
 * bluetooth
