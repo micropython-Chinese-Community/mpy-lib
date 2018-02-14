@@ -20,7 +20,7 @@ class neo16x16:
         self.np.write()
 
     def set(self, n, color=''):
-        if dat!='':
+        if color!='':
             self.np[n] = color
         else:
             self.np[n] = self.color
