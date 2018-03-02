@@ -64,7 +64,7 @@ class BMP280():
         var2 = (((((adc_T>>4)-self.dig_T1)*((adc_T>>4) - self.dig_T1))>>12)*self.dig_T3)>>14
         t = var1+var2
         self.T = ((t * 5 + 128) >> 8)/100
-        var1 = (t>1) - 64000
+        var1 = (t>>1) - 64000
         var2 = (((var1>>2) * (var1>>2)) >> 11 ) * self.dig_P6
         var2 = var2 + ((var1*self.dig_P5)<<1)
         var2 = (var2>>2)+(self.dig_P4<<16)
