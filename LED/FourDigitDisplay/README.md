@@ -35,7 +35,8 @@ show a hex number.
 
 * **showDP(bit = 1, show = True)**  
 show or hide dot piont in give bit  
-
+bit is dot piont position, [0 - 3]  
+show, True will show DP, other will hide it  
 
 ## example
 
