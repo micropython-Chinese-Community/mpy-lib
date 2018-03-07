@@ -3,6 +3,7 @@
 All kinds of micropython drives, examples, libraries.
 
 * [LCD](lcd)
+* [LED](LED)
 * [Sensor](sensor)
 * [Neopixel](neopixel)
 * keyboard

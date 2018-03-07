@@ -1,0 +1,76 @@
+'''
+    mpy drive for Four Digit LED Display (TM1650)
+
+    Author: shaoziyang
+    Date:   2018.3
+
+    http://www.micropython.org.cn
+
+'''
+from machine import I2C
+
+COMMAND_I2C_ADDRESS = const(0x24)
+DISPLAY_I2C_ADDRESS = const(0x34)
+
+buf = (0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F,0x77,0x7C,0x39,0x5E,0x79,0x71)
+
+class FourDigitDisplay():
+    def __init__(self, i2c):
+        self.i2c = i2c
+        self._intensity = 3
+        self.dbuf = [0, 0, 0, 0]
+        self.tbuf = bytearray(1)
+        self.on()
+
+    def intensity(self, dat = -1):
+        if dat < 0 or dat > 8:
+            return self._intensity
+        if dat == 0:
+            self.off()
+        else:
+            self._intensity = dat
+            self.cmd((dat<<4)|0x01)
+
+    def cmd(self, c):
+        self.tbuf[0] = c
+        self.i2c.writeto(COMMAND_I2C_ADDRESS, self.tbuf)
+
+    def dat(self, bit, d):
+        self.tbuf[0] = d
+        self.i2c.writeto(DISPLAY_I2C_ADDRESS + bit%4, self.tbuf)
+
+    def on(self):
+        self.cmd((self._intensity<<4)|0x01)
+
+    def off(self):
+        self._intensity = 0
+        self.cmd(0)
+
+    def clear(self):
+        self.dat(0, 0)
+        self.dat(1, 0)
+        self.dat(2, 0)
+        self.dat(3, 0)
+        self.dbuf = [0, 0, 0, 0]
+
+    def showbit(self, num, bit = 0):
+        self.dbuf[bit%4] = buf[num%16]
+        self.dat(bit, buf[num%16])
+
+    def shownum(self, num):
+        self.showbit(num % 10, 3)
+        self.showbit((num // 10) % 10, 2)
+        self.showbit((num // 100) % 10, 1)
+        self.showbit((num // 1000) % 10)
+
+    def showhex(self, hex):
+        self.showbit(hex % 16, 3)
+        self.showbit((hex >> 4) % 16, 2)
+        self.showbit((hex >> 8) % 16, 1)
+        self.showbit((hex >> 12) % 16)
+        
+    def showDP(self, bit = 1, show = True):
+        if show:
+            self.dat(bit, self.dbuf[bit] | 0x80)
+        else:
+            self.dat(bit, self.dbuf[bit] & 0x7F)
