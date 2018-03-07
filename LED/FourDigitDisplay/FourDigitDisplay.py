@@ -58,16 +58,24 @@ class FourDigitDisplay():
         self.dat(bit, buf[num%16])
 
     def shownum(self, num):
+        if num < 0:
+            self.dat(0, 0x40)   # '-'
+            num = -num
+        else:
+            self.showbit((num // 1000) % 10)
         self.showbit(num % 10, 3)
         self.showbit((num // 10) % 10, 2)
         self.showbit((num // 100) % 10, 1)
-        self.showbit((num // 1000) % 10)
 
-    def showhex(self, hex):
-        self.showbit(hex % 16, 3)
-        self.showbit((hex >> 4) % 16, 2)
-        self.showbit((hex >> 8) % 16, 1)
-        self.showbit((hex >> 12) % 16)
+    def showhex(self, num):
+        if num < 0:
+            self.dat(0, 0x40)   # '-'
+            num = -num
+        else:
+            self.showbit((num >> 12) % 16)
+        self.showbit(num % 16, 3)
+        self.showbit((num >> 4) % 16, 2)
+        self.showbit((num >> 8) % 16, 1)
         
     def showDP(self, bit = 1, show = True):
         if show:
