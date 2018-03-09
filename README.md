@@ -9,6 +9,7 @@ All kinds of micropython drives, examples, libraries.
 * keyboard
 * radio
 * bluetooth
+* [misc](misc)
 
 From microbit/micropython Chinese community.  
 www.micropython.org.cn
