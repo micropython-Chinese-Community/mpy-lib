@@ -1,3 +1,11 @@
+'''
+    AT24C32 EEPROM drive
+
+    Author: shaoziyang
+    Date:   2018.3
+
+    http://www.micropython.org.cn
+'''
 from machine import I2C
 
 AT24CXX_I2C_ADDRESS = (80)
