@@ -106,7 +106,7 @@ class DS1307():
         if hour == None:
             return self.HexToDec(self.getReg(DS1307_REG_HOUR))
         else:
-            self.setReg(DS1307_REG_HOUR, self.DecToHex(month%24))
+            self.setReg(DS1307_REG_HOUR, self.DecToHex(hour%24))
 
     def Minute(self, minute = None):
         if minute == None:
