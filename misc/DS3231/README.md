@@ -57,21 +57,27 @@ repeat: ALARM repeat mode
   - PER_DAY,    alarm ervry day, when hour and minute equal with RTC's hour and minute.
   - PER_WEEKDAY, alarm every week, when day equal with RTC's weekday.
   - PER_MONTH,  alarm every month, when day and hour and minute equal with RTC.
-  - DISABLE, disable alarm.  
+  - PER_DISABLE, disable alarm.  
 
 ## example
 
 ```
-import DS1307
 from machine import I2C, Pin
+import DS3231
 
 i2c = I2C(sda = Pin(5), scl=Pin(4))
-ds = DS1307.DS1307(i2c)
+ds = DS3231.DS3231(i2c)
 
-ds.DateTime()
-ds.DateTime([2018, 3, 9, 4, 23, 0, 1, 0])
+ds.Hour(12)
 
-ds.Hour()
+ds.Time()
+ds.Time([12,10,0])
+
+ds.DateTime([2018,3,12,1,22,10,0])
+
+ds.ALARM(12, 20, 10, ds.PER_DISABLE)
+ds.ALARM(12, 20, 10, ds.PER_DAY)
+ds.ClearALARM()
 ```
 
 From microbit/micropython Chinese community.  
