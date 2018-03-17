@@ -14,7 +14,6 @@ TM1637_CMD1 = (64)  # 0x40 data command
 TM1637_CMD2 = (192) # 0xC0 address command
 TM1637_CMD3 = (128) # 0x80 display control command
 TM1637_DELAY = (10) # 10us delay between clk/dio pulses
-TM1637_MSB = (128)  # msb is the decimal point or the colon depending on your display
 
 _SEGMENTS = (0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F,0x77,0x7C,0x39,0x5E,0x79,0x71)
 
@@ -67,8 +66,6 @@ class TM1637():
             sleep_us(TM1637_DELAY)
             self.clk(0)
             sleep_us(TM1637_DELAY)
-        self.clk(0)
-        sleep_us(TM1637_DELAY)
         self.clk(1)
         sleep_us(TM1637_DELAY)
         self.clk(0)
