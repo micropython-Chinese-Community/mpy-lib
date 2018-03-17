@@ -142,11 +142,4 @@ class TM1637():
         self.showbit((num >> 4) % 16, 2)
         self.showbit((num >> 8) % 16, 1)
 
-    def scroll(self, string, delay=250):
-        segments = string if isinstance(string, list) else self.encode_string(string)
-        data = [0] * 8
-        data[4:0] = list(segments)
-        for i in range(len(segments) + 5):
-            self.write(data[0+i:4+i])
-            sleep_ms(delay)
 
