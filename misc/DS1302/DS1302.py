@@ -65,7 +65,7 @@ class DS1302:
     def wr(self, reg, dat):
         self.setReg(DS1302_REG_WP, 0)
         self.setReg(reg, dat)
-        self.setReg(DS1302_REG_WP, 0)
+        self.setReg(DS1302_REG_WP, 0x80)
                 
     def start(self):
         t = self.getReg(DS1302_REG_SECOND + 1)
