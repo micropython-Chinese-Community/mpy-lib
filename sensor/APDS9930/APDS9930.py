@@ -8,6 +8,7 @@
 
 '''
 from machine import I2C, Pin
+import time
 
 APDS9930_I2C_ADDRESS = 0x39
 
@@ -114,6 +115,7 @@ class APDS9930:
         if on:
             t |= 1
         self.setReg(APDS9930_ENABLE, t)
+        time.sleep_ms(3)
 
     def ALS_Enable(self, on=True):
         t = self.getReg(APDS9930_ENABLE)
@@ -145,4 +147,4 @@ class APDS9930:
         return IAC * LPC
 
     def getProximity(self):
-        return self.get2Reg(APDS9930_PDATAL)
+        return self.get2Reg(APDS9930_PDATAL)/self.PGAIN()
