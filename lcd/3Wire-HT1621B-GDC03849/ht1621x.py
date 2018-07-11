@@ -143,12 +143,12 @@ class HT1621B:
     * Function   : HT1621B parameter initialization.
     * Input      :_timer: Disable time base set
     *             _wdt  : Disable WDT set
-    *             _scs   = CMD_RC256K,       # System clock source, on-chip RC oscillator 
-    *             _bias  = CMD_B3C4,        # LCD bias option and commons option set
-    *             _tone  = CMD_TONE4K,      # Tone Set
-    *             _irq   = CMD_IRQ_DIS,     # IRQ Set
-    *             _twc   = CMD_F128,        # Time base/WDT clock set
-    *             _mod   = CMD_NORMAL       # Work mode Set
+    *             _scs  : System clock source, on-chip RC oscillator 
+    *             _bias : LCD bias option and commons option set
+    *             _tone : Tone Set
+    *             _irq  : IRQ Set
+    *             _twc  : Time base/WDT clock set
+    *             _mod  : Work mode Set
     * Output:    : None.
     * Return     : None.
     * description: To be done.
