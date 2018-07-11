@@ -27,13 +27,13 @@ SOFTWARE.
 '''/******************************************************************************
 * File       : gdc03849.py
 * Function   : LCD Drive
-* description: To be done.
+* Description: To be done.
 * Version    : V1.00
 * Author     : Robin Chen
 * Date       : 9th May 2018
 * History    :  No.  When           Who           What
 *               1    9/May/2018     Robin Chen    Create
-*               2    30/May/2018    Robin Chen    Fengzhuang
+*               2    30/May/2018    Robin Chen    Complete package
 ******************************************************************************/'''
 
 class GDC03849:
@@ -43,7 +43,7 @@ class GDC03849:
     * Input      : _ht1621x: object.
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 9th May 2018
@@ -86,7 +86,7 @@ class GDC03849:
     * Input      : _gdcdata: value.
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 9th May 2018
@@ -106,7 +106,7 @@ class GDC03849:
     * Input      : _gdcdata: value.
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 9th May 2018
@@ -125,7 +125,7 @@ class GDC03849:
     * Input      : None.
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 9th May 2018
@@ -140,7 +140,7 @@ class GDC03849:
     * Input      : None.
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 9th May 2018
@@ -156,7 +156,7 @@ class GDC03849:
     * Input      : None.
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 9th May 2018
@@ -172,7 +172,7 @@ class GDC03849:
     * Input      : None.
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 9th May 2018
