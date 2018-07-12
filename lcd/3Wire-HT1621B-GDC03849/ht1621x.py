@@ -28,7 +28,7 @@ SOFTWARE.
 /******************************************************************************
 * File       : ht1621x.py
 * Function   : Drive ht1621x.
-* description: To be done.
+* Description: To be done.
 * Version    : V0.13
 * Author     : Robin Chen
 * Date       : 9th May 2018
@@ -83,7 +83,7 @@ CMD_WDT_DIS = const(0x00A)  # Disable WDT time-out flag output
 CMD_WDT_EN  = const(0x00E)  # Enable WDT time-out flag output
 CMD_CLR_WDT = const(0x01C)  # Clear the contents of WDT stage
 
-# 声音输出设置
+# Sound output set
 CMD_TONE2K  = const(0x0C0)  # Tone frequency, 2kHz
 CMD_TONE4K  = const(0x080)  # Tone frequency, 4kHz
 CMD_TONEON  = const(0x012)  # Turn on tone outputs
@@ -119,7 +119,7 @@ class HT1621B:
     *              _htdata:DATA Pin
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 30th May 2018
@@ -151,7 +151,7 @@ class HT1621B:
     *             _mod  : Work mode Set
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 30th May 2018
@@ -191,7 +191,7 @@ class HT1621B:
     * Input      : _da: 9 bit data
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 30th May 2018
@@ -212,7 +212,7 @@ class HT1621B:
     * Input      : _cmd: commend code
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 30th May 2018
@@ -236,7 +236,7 @@ class HT1621B:
     *              _htdata: 4 bit Data,is a list
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 30th May 2018
@@ -262,7 +262,7 @@ class HT1621B:
     *              _htdata: 4 bit * 32 Data,
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 30th May 2018
@@ -289,7 +289,7 @@ class HT1621B:
     *              _nbit: 1~32
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 30th May 2018
@@ -309,7 +309,7 @@ class HT1621B:
     *              _nbit: 1~32
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 30th May 2018
@@ -328,7 +328,7 @@ class HT1621B:
     * Input      : None.
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 30th May 2018
@@ -344,7 +344,7 @@ class HT1621B:
     * Input      : None.
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 30th May 2018
@@ -360,7 +360,7 @@ class HT1621B:
     * Input      : _t: BEEP Continuous ringing time
     * Output:    : None.
     * Return     : None.
-    * description: To be done.
+    * Description: To be done.
     * Version    : V1.00
     * Author     : Robin Chen
     * Date       : 30th May 2018
