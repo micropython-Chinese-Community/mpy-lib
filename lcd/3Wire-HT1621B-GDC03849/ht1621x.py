@@ -36,7 +36,7 @@ SOFTWARE.
 *               1    9/May/2018     Robin Chen    Create
 *               1    11/May/2018    Robin Chen    command to bin
 *               1    17/May/2018    Robin Chen    Create
-*               1    30/May/2018    Robin Chen    code Fengzhuang
+*               1    30/May/2018    Robin Chen    Code encapsulation
 ******************************************************************************/'''
 
 from micropython import const
