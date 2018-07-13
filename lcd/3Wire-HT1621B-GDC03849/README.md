@@ -1,10 +1,17 @@
 3Wire-HT1621B-GDC03849
 ====
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Frame diagram](./images/ht1621b_gdc.png)
+
+
 
 HT1621B
 ----
 HT1621B is a LCD Drive IC.
+
+参数：
+name | Op
+---- | ----
+Val  | 20
 
 
 
