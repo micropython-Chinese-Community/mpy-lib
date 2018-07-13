@@ -1,4 +1,4 @@
-English
+[English](./README.md)
 
 3Wire-HT1621B-GDC03849
 ====
@@ -29,24 +29,41 @@ Val  | 20
          _twc   = CMD_F128,           # 时期/WDT时钟输出设置（F1～F128）</BR>
          _mod   = CMD_NORMAL          # 模式设置（测试模式和普通模式）</BR>
          ):
-
+  > 芯片功能与参数初始化。
 
 * HT1621xWrCmd(_cmd)
-
+  > 芯片功能与参数初始化。
 
 * HT1621xWrOneData(_addr, _htdata)
-
+  > 芯片功能与参数初始化。
+  
 * HT1621xWrAllData(_addr, _htdata)
+  > 芯片功能与参数初始化。
+  
 
 * ALLSHOW(_addr, _nbit)
+  > 芯片功能与参数初始化。
+  
 
 * ALLCLEAR(_addr, _nbit)
+  > 芯片功能与参数初始化。
+  
 
 * LCDON()
+  > 打开LCD偏压发生器。
+  
 
 * LCDOFF()
+  > 关闭LCD偏压发生器。
+  
 
 * HTBEEP(_t)
+  > 使蜂鸣器一直响指定的时间后不响。
+  > _t:保持时间，单位：毫秒
+  ‘’‘Python
+  # 响500毫秒
+  HTBEEP(500)
+  '''
 
 
 
