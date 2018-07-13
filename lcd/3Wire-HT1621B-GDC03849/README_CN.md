@@ -19,7 +19,8 @@ Val  | 20
 
 
 **API**
-    init(_timer = CMD_TIMER_DIS,      # 时期输出设置</BR>
+
+* init(_timer = CMD_TIMER_DIS,      # 时期输出设置</BR>
          _wdt   = CMD_WDT_DIS,        # WDT溢出标志输出设置</BR>
          _scs   = CMD_RC256K,         # 系统时钟源设置</BR>
          _bias  = CMD_B3C4,           # 偏压和公共端设置</BR>
@@ -30,7 +31,23 @@ Val  | 20
          ):
 
 
-    def HT1621xWrCmd(self, _cmd):
+* HT1621xWrCmd(_cmd)
+
+
+* HT1621xWrOneData(_addr, _htdata)
+
+* HT1621xWrAllData(_addr, _htdata)
+
+* ALLSHOW(_addr, _nbit)
+
+* ALLCLEAR(_addr, _nbit)
+
+* LCDON()
+
+* LCDOFF()
+
+* HTBEEP(_t)
+
 
 
 
