@@ -34,11 +34,11 @@ Val  | 20
 * HT1621xWrCmd(_cmd)
   > 发送单个命令。
 
-* HT1621xWrOneData(_addr, _htdata)
-  > 指定地址发送单个数据。
-  
-* HT1621xWrAllData(_addr, _htdata)
-  > 指定起始地址，连续发送多个数据。
+* HT1621xWrOneData(_addr, _htdata)</BR>
+指定地址发送单个数据。
+
+* HT1621xWrAllData(_addr, _htdata)</BR>
+指定起始地址，连续发送多个数据。
   
 
 * ALLSHOW(_addr, _nbit)
