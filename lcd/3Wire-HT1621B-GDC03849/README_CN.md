@@ -28,44 +28,49 @@ Val  | 20
          _irq   = CMD_IRQ_DIS,        # IRQ设置（生效/失效）</BR>
          _twc   = CMD_F128,           # 时期/WDT时钟输出设置（F1～F128）</BR>
          _mod   = CMD_NORMAL          # 模式设置（测试模式和普通模式）</BR>
-         ):
-  > 芯片功能与参数初始化。
+         )</BR>
+芯片功能与参数初始化。
 
-* HT1621xWrCmd(_cmd)
-  > 发送单个命令。
+* HT1621xWrCmd(_cmd)</BR>
+发送单个命令。</BR>
+_cmd: 命令。（16进制）
 
 * HT1621xWrOneData(_addr, _htdata)</BR>
-指定地址发送单个数据。
+指定地址发送单个数据。</BR>
+_addr: 地址（16进制）</BR>
+_htdata:数据，通常为1个字节。（16进制）
 
 * HT1621xWrAllData(_addr, _htdata)</BR>
-指定起始地址，连续发送多个数据。
+指定起始地址，连续发送多个数据。</BR>
+_addr：起始地址（16进制）</BR>
+_htdata：连续的数据（16进制列表）
+
+* ALLSHOW(_addr, _nbit)</BR>
+指定起始地址连续发送指定个数的 1。</BR>
+_addr:起始地址（16进制）</BR>
+_nbit:数据SEG位数。
   
 
-* ALLSHOW(_addr, _nbit)
-  > 指定起始地址连续发送指定个数的 1。</BR>
-  
-  
-
-* ALLCLEAR(_addr, _nbit)
-  > 指定起始地址连续发送指定个数的 0。</BR>
+* ALLCLEAR(_addr, _nbit)</BR>
+指定起始地址连续发送指定个数的 0。</BR>
   _addr: 起始地址。（0x00-0x)</BR>
   _nbit: RAM区（SEG）个数（1-32）。</BR>
   
-* LCDON()
-  > 打开LCD偏压发生器。
+* LCDON()</BR>
+打开LCD偏压发生器。
   
-* LCDOFF()
-  > 关闭LCD偏压发生器。
-  
+* LCDOFF()</BR>
+关闭LCD偏压发生器。  
 
-* HTBEEP(_t)
-  > 使蜂鸣器一直响指定的时间后不响。</BR>
+* HTBEEP(_t)</BR>
+使蜂鸣器一直响指定的时间后不响。</BR>
   _t:保持时间，单位：毫秒
   ```python
   # 响500毫秒
   HTBEEP(500)
   ```
-
+  
+  </BR></BR>
 
 
 
