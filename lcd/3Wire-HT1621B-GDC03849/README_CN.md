@@ -5,6 +5,14 @@
 ![Frame diagram](./images/ht1621b_gdc.png)
 > 3Wire-HT1621B-GDC03849 为ht1621b作为驱动芯片的GDC03849液晶驱动模块。驱动芯片与主CPU为3+CS总线通讯方式进行数据交换。
 
+* 功能符号(标志字)</BR>
+名称 | 描述
+--- | ---
+FLAG_CMD | 命令
+FLAG_READ | 只读RAM
+FLAG_WRITE | 只写RAM
+FLAG_MODIFY | 读和写RAM(即修改RAM)READ-MODIFY-WRITE
+
 
 HT1621B
 ----
