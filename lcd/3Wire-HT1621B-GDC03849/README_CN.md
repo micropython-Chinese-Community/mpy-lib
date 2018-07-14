@@ -234,6 +234,7 @@ NUMCODE_TEMP_HEX | 以元组方式存储的温度区单个字符的段码编码�
 * 温度区显示为：温度 33.05 摄氏度，湿度 98.34
 
 ```python
+# 当前实验板PYB Nano
 from ht1621x import HT1621B
 from gdc03849 import GDC03849
 
@@ -253,6 +254,6 @@ gdc.viewRH(98.34)
 ```
 
 [HT]:http://www.holtek.com.cn
-[DL]:http://www.good-display.cn/
-[1]:
-[2]:
+[DL]:http://www.good-display.cn
+[1]:./DataSheet/HT1621CN.pdf
+[2]:./DataSheet/GDC03849C1P6.8.pdf
