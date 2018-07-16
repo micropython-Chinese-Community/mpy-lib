@@ -8,7 +8,7 @@
 
 HT1621B
 ----
-> The HT1621 is a 128-point memory image and multi-function LCD driver manufactured by [HOLTEK] [HT]. The software configuration features of the HT1621 make it suitable for a variety of LCD applications including LCD modules and display subsystems. There are only 4 or 5 pins for connecting the main controller to the HT1621. The HT1621 also has a power-saving command to reduce system power consumption. Please read the [HT1621B Data Sheet][1] for details.
+> The HT1621 is a 128-point memory image and multi-function LCD driver manufactured by [HOLTEK][HT]. The software configuration features of the HT1621 make it suitable for a variety of LCD applications including LCD modules and display subsystems. There are only 4 or 5 pins for connecting the main controller to the HT1621. The HT1621 also has a power-saving command to reduce system power consumption. Please read the [HT1621B Data Sheet][1] for details.
 
 
 #### API
@@ -188,7 +188,7 @@ HT1621B
 
 GDC03849
 ----
-> GDC03849 is a liquid crystal screen produced by [Good-Display] [DL], which is only used to display the temperature and temperature values of 3-digit integers and 2-digit decimals. For details, please read [GDC03849 Data Sheet] [2].
+> GDC03849 is a liquid crystal screen produced by [Good-Display][DL], which is only used to display the temperature and temperature values of 3-digit integers and 2-digit decimals. For details, please read [GDC03849 Data Sheet][2].
 
 #### API
 
