@@ -15,13 +15,13 @@ HT1621B
 
 * **init(_timer = CMD_TIMER_DIS, _wdt = CMD_WDT_DIS, _scs = CMD_RC256K, _bias = CMD_B3C4, _tone = CMD_TONE4K, _irq = CMD_IRQ_DIS, _twc = CMD_F128, _mod = CMD_NORMAL)**</BR>
   *Chip function and parameter initialization.*
-  _timer: Time Bias output settings</BR>
+  _timer: Time base output settings</BR>
   _wdt: WDT Set</BR>
   _scs: System clock source setting</BR>
   _bias: Bias and Com settings</BR>
   _tone: Sound settings</BR>
   _irq: IRQ Set</BR>
-  _twc: Time Bias/WDT clock output setting（F1～F128）</BR>
+  _twc: Time base/WDT clock output setting（F1～F128）</BR>
   _mod: Mode setting (test mode and normal mode)</BR>
   
 * **HT1621xWrCmd(_cmd)**</BR>
