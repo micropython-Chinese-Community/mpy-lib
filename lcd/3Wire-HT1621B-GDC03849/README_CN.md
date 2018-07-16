@@ -15,13 +15,13 @@ HT1621B
 
 * **init(_timer = CMD_TIMER_DIS, _wdt = CMD_WDT_DIS, _scs = CMD_RC256K, _bias = CMD_B3C4, _tone = CMD_TONE4K, _irq = CMD_IRQ_DIS, _twc = CMD_F128, _mod = CMD_NORMAL)**</BR>
   *芯片功能与参数初始化*
-  _timer: 时期输出设置</BR>
+  _timer: 时基输出设置</BR>
   _wdt: WDT溢出标志输出设置</BR>
   _scs: 系统时钟源设置</BR>
   _bias: 偏压和公共端设置</BR>
   _tone: 声音设置</BR>
   _irq: IRQ设置（生效/失效）</BR>
-  _twc: 时期/WDT时钟输出设置（F1～F128）</BR>
+  _twc: 时基/WDT时钟输出设置（F1～F128）</BR>
   _mod: 模式设置（测试模式和普通模式）</BR>
 
 * **HT1621xWrCmd(_cmd)**</BR>
