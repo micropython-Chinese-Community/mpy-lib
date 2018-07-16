@@ -13,20 +13,19 @@ HT1621B
 
 #### 接口
 
-* **init(_timer = CMD_TIMER_DIS,      # 时期输出设置</BR>
-         _wdt   = CMD_WDT_DIS,        # WDT溢出标志输出设置</BR>
-         _scs   = CMD_RC256K,         # 系统时钟源设置</BR>
-         _bias  = CMD_B3C4,           # 偏压和公共端设置</BR>
-         _tone  = CMD_TONE4K,         # 声音设置</BR>
-         _irq   = CMD_IRQ_DIS,        # IRQ设置（生效/失效）</BR>
-         _twc   = CMD_F128,           # 时期/WDT时钟输出设置（F1～F128）</BR>
-         _mod   = CMD_NORMAL          # 模式设置（测试模式和普通模式）</BR>
-         )**</BR>
-  *芯片功能与参数初始化。*
+* **init(_timer = CMD_TIMER_DIS, _wdt = CMD_WDT_DIS, _scs = CMD_RC256K, _bias = CMD_B3C4, _tone = CMD_TONE4K, _irq = CMD_IRQ_DIS, _twc = CMD_F128, _mod = CMD_NORMAL)**</BR>
+  *芯片功能与参数初始化*
+  _timer: 时期输出设置</BR>
+  _wdt: WDT溢出标志输出设置</BR>
+  _scs: 系统时钟源设置</BR>
+  _bias: 偏压和公共端设置</BR>
+  _tone: 声音设置</BR>
+  _irq: IRQ设置（生效/失效）</BR>
+  _twc: 时期/WDT时钟输出设置（F1～F128）</BR>
+  _mod: 模式设置（测试模式和普通模式）</BR>
 
 * **HT1621xWrCmd(_cmd)**</BR>
   *发送单个命令。*</BR>
-
   _cmd: 命令。（16进制）</BR>
   ```python
   # 向ht1621b发送打开LCD偏置电压（即打开LCD电源）的命令
@@ -34,7 +33,6 @@ HT1621B
   ```
 * **HT1621xWrOneData(_addr, _htdata)**</BR>
   *指定地址发送单个数据。*</BR>
-
   _addr: 地址（16进制）</BR>
   _htdata:数据，通常为1个字节。（16进制）</BR>
   ```python
@@ -153,9 +151,9 @@ HT1621B
   名称 | 描述
   --- | ---
   CMD_TONE2K | 设置声音频率输出为2KHz
-  CMD_TONE4K |  设置声音频率输出为4KHz
-  CMD_TONEON |  打开声音输出
-  CMD_TONEOFF |  关闭声音输出（上电时默认设置）
+  CMD_TONE4K | 设置声音频率输出为4KHz
+  CMD_TONEON | 打开声音输出
+  CMD_TONEOFF | 关闭声音输出（上电时默认设置）
 
 * 时基/WDT输出设置
 
@@ -190,7 +188,7 @@ HT1621B
 
 GDC03849
 ----
-> GDC03849 是一款由大连佳显公司生产的液晶屏幕,仅用于显示3位整数与2位小数的温度与温度值。详细信息请阅读 [GDC03849数据手册][2]。
+> GDC03849 是一款由[大连佳显][DL]公司生产的液晶屏幕,仅用于显示3位整数与2位小数的温度与温度值。详细信息请阅读 [GDC03849数据手册][2]。
 
 #### 接口
 
@@ -232,7 +230,7 @@ NUMCODE_TEMP_HEX | 以元组方式存储的温度区单个字符的段码编码�
 
 #### 综合示例
 
-* 温度区显示为：温度 33.05 摄氏度，湿度 98.34
+* 温度区显示为：温度 33.05 摄氏度，湿度 98.34%
 
 ```python
 # 当前实验板PYB Nano
