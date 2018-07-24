@@ -70,10 +70,10 @@ class LCD1620():
     def off(self):
         self.setcmd(0x08)
 
-    def shl(():
+    def shl(self):
         self.setcmd(0x18)
 
-    def shr():
+    def shr(self):
         self.setcmd(0x1C)
 
     def char(self, ch, x=-1, y=0):
