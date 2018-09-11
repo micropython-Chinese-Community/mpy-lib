@@ -21,7 +21,7 @@
 
 用法举例：
 
-<code>
+```python
 from keyboard import KEYBOARD
 
 # 按键引脚
@@ -30,6 +30,17 @@ p = Pin('B3')
 # 定时器,按键时钟使用
 s = Timer(1)
 
+# 长按事件
+def evn_long(con):
+    print("您按下按键已保持 ", (con*10)/1000," 秒的时间了")
+
+# 连续点击事件
+def evn_con(con):
+    print("您已连续点击了：", con, " 次")
+    
 # 声明按键对象，并设置事件
 sw = KEYBOARD(p, s, 0, evn_long, evn_con, "UP")
-</code>
+
+
+
+```
