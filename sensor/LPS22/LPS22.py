@@ -6,6 +6,7 @@
 # v2.0 2019.7
 
 LPS22_CTRL_REG1    = const(0x10)
+LPS22_CTRL_REG2    = const(0x11)
 LPS22_TEMP_OUT_L   = const(0x2B)
 LPS22_PRESS_OUT_XL = const(0x28)
 LPS22_PRESS_OUT_L  = const(0x29)
@@ -16,9 +17,20 @@ class LPS22():
         self.addr = addr
         self.tb = bytearray(1)
         self.rb = bytearray(1)
+        self.oneshot = False
         self.irq_v = [0, 0]
         # ODR=1 EN_LPFP=1
         self.setreg(LPS22_CTRL_REG1, 0x18)
+
+    def mode(self, oneshot=None):
+        if oneshot is None:
+            return self.oneshot
+        else:
+            self.getreg(LPS22_CTRL_REG1)
+            self.oneshot = oneshot
+            if oneshot: self.rb[0] &= 0x0F
+            else: self.rb[0] |= 0x10
+            self.setreg(LPS22_CTRL_REG1, self.rb[0])
 
     def int16(self, d):
         return d if d < 0x8000 else d - 0x10000
@@ -34,13 +46,19 @@ class LPS22():
     def get2reg(self, reg):
         return self.getreg(reg) + self.getreg(reg+1) * 256
 
+    def ONE_SHOT(self):
+        if self.oneshot:
+            self.setreg(LPS22_CTRL_REG2, self.getreg(LPS22_CTRL_REG2) | 0x01)
+
     def temperature(self):
+        self.ONE_SHOT()
         try:
             return self.int16(self.get2reg(LPS22_TEMP_OUT_L))/100
         except MemoryError:
             return self.temperature_irq()
 
     def pressure(self):
+        self.ONE_SHOT()
         try:
             return (self.getreg(LPS22_PRESS_OUT_XL) + self.get2reg(LPS22_PRESS_OUT_L) * 256)/4096
         except MemoryError:
@@ -56,9 +74,11 @@ class LPS22():
         return (((1013.25 / self.pressure())**(1/5.257)) - 1.0) * (self.temperature() + 273.15) / 0.0065
 
     def temperature_irq(self):
+        self.ONE_SHOT()
         return self.int16(self.get2reg(LPS22_TEMP_OUT_L))//100
 
     def pressure_irq(self):
+        self.ONE_SHOT()
         return self.get2reg(LPS22_PRESS_OUT_L) >> 4
 
     def get_irq(self):
