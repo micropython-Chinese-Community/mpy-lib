@@ -34,16 +34,6 @@ class LPS22():
     def get2reg(self, reg):
         return self.getreg(reg) + self.getreg(reg+1) * 256
 
-    def power(self):
-        t = self.getreg(LPS22HB_CTRL_REG1, LPS22HB_ADDRESS) & 0x0F
-        self.setreg(t|0x10, LPS22HB_CTRL_REG1, LPS22HB_ADDRESS)
-        self.LPS22HB_ON = True
-
-    def LPS22HB_poweroff(self):
-        t = self.getreg(LPS22HB_CTRL_REG1, LPS22HB_ADDRESS) & 0x0F
-        self.setreg(t, LPS22HB_CTRL_REG1, LPS22HB_ADDRESS)
-        self.LPS22HB_ON = False
-
     def temperature(self):
         try:
             return self.int16(self.get2reg(LPS22_TEMP_OUT_L))/100
