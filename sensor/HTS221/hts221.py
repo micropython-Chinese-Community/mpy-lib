@@ -7,11 +7,10 @@
 
 from machine import I2C
 
-HTS_I2C_ADDR = const(0x5F)
-
 class HTS221(object):
-    def __init__(self, i2c):
+    def __init__(self, i2c, addr = 0x5F):
         self.i2c = i2c
+        self.addr = addr
         # data buffer
         self.tb = bytearray(1)
         self.rb = bytearray(1)
@@ -39,10 +38,10 @@ class HTS221(object):
 
     def setreg(self, reg, dat):
         self.tb[0] = dat
-        self.i2c.writeto_mem(HTS_I2C_ADDR, reg, self.tb)
+        self.i2c.writeto_mem(self.addr, reg, self.tb)
 
     def getreg(self, reg):
-        self.i2c.readfrom_mem_into(HTS_I2C_ADDR, reg, self.rb)
+        self.i2c.readfrom_mem_into(self.addr, reg, self.rb)
         return self.rb[0]
    
     def get2reg(self, reg):
