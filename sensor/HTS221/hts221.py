@@ -14,6 +14,7 @@ class HTS221(object):
         # data buffer
         self.tb = bytearray(1)
         self.rb = bytearray(1)
+        self.oneshot = False
         self.irq_v = [0, 0]
         # HTS221 Temp Calibration registers
         self.T0_OUT = self.int16(self.get2reg(0x3C))
@@ -30,9 +31,28 @@ class HTS221(object):
         self.K2 = (self.H1_rH - self.H0_rH) / (self.H1_OUT - self.H0_OUT)
         # set av conf: T=4 H=8
         self.setreg(0x10, 0x26)
-        # set CTRL_REG1: PD=1 BDU=1 ODR=1
-        self.setreg(0x20, 0x85)
-   
+        # set CTRL_REG1: PD=1 BDU=0 ODR=1
+        self.setreg(0x20, 0x81)
+        self.mode(0)
+
+    def mode(self, oneshot = None):
+        if oneshot is None:
+            return self.oneshot
+        else:
+            self.getreg(0x20)
+            self.oneshot = oneshot
+            if oneshot: self.rb[0] &= 0xFC
+            else: self.rb[0] |= 0x01
+            self.setreg(0x20, self.rb[0])
+
+    def ONE_SHOT(self, b):
+        if self.oneshot:
+            self.setreg(0x21, self.getreg(0x21) | 0x01)
+            self.getreg(0x2d - b*2)
+            while 1:
+                if self.getreg(0x27) & b:
+                    return
+
     def int16(self, d):
         return d if d < 0x8000 else d - 0x10000
 
@@ -50,6 +70,7 @@ class HTS221(object):
     # calculate Temperature
     def temperature(self):
         try:
+            self.ONE_SHOT(1)
             return round((self.T0_degC + (self.int16(self.get2reg(0x2A)) - self.T0_OUT) * self.K1)/8, 1)
         except MemoryError:
             return self.temperature_irq()
@@ -57,6 +78,7 @@ class HTS221(object):
     # calculate Humidity
     def humidity(self):
         try:
+            self.ONE_SHOT(2)
             return round((self.H0_rH + (self.int16(self.get2reg(0x28)) - self.H0_OUT) * self.K2)/10, 1)
         except MemoryError:
             return self.humidity_irq()
@@ -68,9 +90,11 @@ class HTS221(object):
             return self.get_irq()
 
     def temperature_irq(self):
+        self.ONE_SHOT(1)
         return (self.T0_degC + (self.int16(self.get2reg(0x2A)) - self.T0_OUT) * (self.T1_degC - self.T0_degC) // (self.T1_OUT - self.T0_OUT)) >> 3
 
     def humidity_irq(self):
+        self.ONE_SHOT(2)
         return (self.H0_rH + (self.int16(self.get2reg(0x28)) - self.H0_OUT) * (self.H1_rH - self.H0_rH) // (self.H1_OUT - self.H0_OUT))//10
 
     def get_irq(self):
