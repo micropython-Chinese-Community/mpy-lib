@@ -4,7 +4,7 @@
 * https://www.st.com/content/st_com/en/products/mems-and-sensors/pressure-sensors/lps22hd.html
 * https://www.st.com/content/st_com/en/products/mems-and-sensors/pressure-sensors/lps22hh.html
 
-
+![](en.LPS22HB_pressure_sensor_web.jpg)
 
 ## example
 
