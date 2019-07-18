@@ -8,6 +8,7 @@
 * [ST humidity and temperature sensor](HTS221)
 * [ST pressure sensor](LPS22)
 * [ST STTS751 temperature sensor](STTS751)
+* [ST magnetic sensor](LIS2MDL)
 
 From microbit/micropython Chinese community.  
 www.micropython.org.cn
