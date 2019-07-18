@@ -20,11 +20,11 @@ class LPS22():
         self.rb = bytearray(1)
         self.oneshot = False
         self.irq_v = [0, 0]
-        # ODR=1 EN_LPFP=1
-        self.setreg(LPS22_CTRL_REG1, 0x18)
-        self.mode(False)
+        # ODR=1 EN_LPFP=1 BDU=1
+        self.setreg(LPS22_CTRL_REG1, 0x1A)
+        self.oneshot_mode(False)
 
-    def mode(self, oneshot=None):
+    def oneshot_mode(self, oneshot=None):
         if oneshot is None:
             return self.oneshot
         else:
