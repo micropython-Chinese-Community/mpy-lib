@@ -25,7 +25,7 @@ class STTS751():
         self.tb = bytearray(1)
         self.rb = bytearray(1)
         self.oneshot = False
-        self.mode(False)
+        self.oneshot_mode(False)
 
     def int16(self, d):
         return d if d < 0x8000 else d - 0x10000
@@ -50,7 +50,7 @@ class STTS751():
             self.rb[0] = (self.rb[0] & 0xF3) | STTS751_RESOLUTION[res-9]
             self.setreg(STTS751_REG_CONFIG, self.rb[0])
 
-    def mode(self, oneshot=None):
+    def oneshot_mode(self, oneshot=None):
         if oneshot is None:
             return self.oneshot
         else:
