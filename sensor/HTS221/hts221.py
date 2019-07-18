@@ -31,11 +31,11 @@ class HTS221(object):
         self.K2 = (self.H1_rH - self.H0_rH) / (self.H1_OUT - self.H0_OUT)
         # set av conf: T=4 H=8
         self.setreg(0x10, 0x26)
-        # set CTRL_REG1: PD=1 BDU=0 ODR=1
-        self.setreg(0x20, 0x81)
-        self.mode(0)
+        # set CTRL_REG1: PD=1 BDU=1 ODR=1
+        self.setreg(0x20, 0x85)
+        self.oneshot_mode(0)
 
-    def mode(self, oneshot = None):
+    def oneshot_mode(self, oneshot = None):
         if oneshot is None:
             return self.oneshot
         else:
