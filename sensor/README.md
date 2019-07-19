@@ -9,6 +9,7 @@
 * [ST LPS22 pressure sensor](LPS22)
 * [ST STTS751 temperature sensor](STTS751)
 * [ST LIS2MDL magnetic sensor](LIS2MDL)
+* [ST LIS2DW12 motion sensor](LIS2DW12)
 
 From microbit/micropython Chinese community.  
 www.micropython.org.cn
