@@ -50,7 +50,6 @@ class LIS2MDL():
             self.rb[0] &= 0xFC
             if oneshot:
                 self.rb[0] |= 0x01
-                pyb.delay(5)
             self.setreg(LIS2MDL_CFG_REG_A, self.rb[0])
 
     def ONE_SHOT(self):
