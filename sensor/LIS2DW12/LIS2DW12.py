@@ -13,10 +13,7 @@ LIS2DW12_OUT_T_L = const(0x0D)
 LIS2DW12_OUT_X_L = const(0x28)
 LIS2DW12_OUT_Y_L = const(0x2A)
 LIS2DW12_OUT_Z_L = const(0x2C)
-LIS2DW12_2G = const(0)
-LIS2DW12_4G = const(1)
-LIS2DW12_8G = const(2)
-LIS2DW12_16G = const(3)
+
 LIS2DW12_SCALE = ('2g', '4g', '8g', '16g')
 
 class LIS2DW12():
@@ -96,7 +93,7 @@ class LIS2DW12():
         try:
             return self.int16(self.get2reg(LIS2DW12_OUT_T_L))/256 + 25
         except MemoryError:
-            self.temperature_irq()
+            return self.temperature_irq()
 
     def temperature_irq(self):
         self.getreg(LIS2DW12_OUT_T_L+1)
@@ -107,10 +104,7 @@ class LIS2DW12():
         if dat is None:
             return LIS2DW12_SCALE[self._scale]
         else:
-            if type(dat) is int:
-                if dat > 3 or dat < 0: return
-                self._scale = dat
-            elif type(dat) is str:
+            if type(dat) is str:
                 if not dat in LIS2DW12_SCALE: return
                 self._scale = LIS2DW12_SCALE.index(dat)
             else: return
