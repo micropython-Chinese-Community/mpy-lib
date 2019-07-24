@@ -19,9 +19,9 @@ STTS751_REG_THERM = const(32)
 STTS751_REG_THERMHYS = const(33)
 
 class STTS751():
-    def __init__(self, i2c, addr = 0x4A):
+    def __init__(self, i2c):
         self.i2c = i2c
-        self.addr = addr
+        self.addr = 0x4A
         self.tb = bytearray(1)
         self.rb = bytearray(1)
         self.oneshot = False
