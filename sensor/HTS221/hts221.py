@@ -8,9 +8,9 @@
 from machine import I2C
 
 class HTS221(object):
-    def __init__(self, i2c, addr = 0x5F):
+    def __init__(self, i2c):
         self.i2c = i2c
-        self.addr = addr
+        self.addr = 0x5F
         # data buffer
         self.tb = bytearray(1)
         self.rb = bytearray(1)
