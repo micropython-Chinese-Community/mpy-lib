@@ -12,9 +12,9 @@ LIS2MDL_OUTY_L_REG = const(0x6A)
 LIS2MDL_OUTZ_L_REG = const(0x6C)
 
 class LIS2MDL():
-    def __init__(self, i2c, addr = 0x1E):
+    def __init__(self, i2c):
         self.i2c = i2c
-        self.addr = addr
+        self.addr = 0x1E
         self.tb = bytearray(1)
         self.rb = bytearray(1)
         # LP=0 ODR=0 MD=0
