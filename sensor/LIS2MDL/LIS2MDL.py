@@ -17,8 +17,8 @@ class LIS2MDL():
         self.addr = 0x1E
         self.tb = bytearray(1)
         self.rb = bytearray(1)
-        # LP=0 ODR=0 MD=0
-        self.setreg(LIS2MDL_CFG_REG_A, 0x00)
+        # TEMP_EN=1 LP=0 ODR=0 MD=0
+        self.setreg(LIS2MDL_CFG_REG_A, 0x80)
         # BDU=1
         self.setreg(LIS2MDL_CFG_REG_C, 0x10)
         self.oneshot = False
