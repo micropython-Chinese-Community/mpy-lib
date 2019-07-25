@@ -78,3 +78,22 @@ class LIS2MDL():
         self.irq_v[2] = self.int16(self.get2reg(LIS2MDL_OUTZ_L_REG))
         return self.irq_v
 
+    // unit uT
+    def x(self):
+        return self.x_raw()*3//20
+
+    // unit uT
+    def y(self):
+        return self.y_raw()*3//20
+
+    // unit uT
+    def z(self):
+        return self.z_raw()*3//20
+
+    // uint uT
+    def get(self):
+        self.ONE_SHOT()
+        self.irq_v[0] = self.int16(self.get2reg(LIS2MDL_OUTX_L_REG))*3//20
+        self.irq_v[1] = self.int16(self.get2reg(LIS2MDL_OUTY_L_REG))*3//20
+        self.irq_v[2] = self.int16(self.get2reg(LIS2MDL_OUTZ_L_REG))*3//20
+        return self.irq_v
