@@ -59,21 +59,22 @@ class LIS2MDL():
                 if self.getreg(LIS2MDL_STATUS_REG) & 0x08:
                     return
 
-    def x(self):
+    def x_raw(self):
         self.ONE_SHOT()
         return self.int16(self.get2reg(LIS2MDL_OUTX_L_REG))
 
-    def y(self):
+    def y_raw(self):
         self.ONE_SHOT()
         return self.int16(self.get2reg(LIS2MDL_OUTY_L_REG))
 
-    def z(self):
+    def z_raw(self):
         self.ONE_SHOT()
         return self.int16(self.get2reg(LIS2MDL_OUTZ_L_REG))
 
-    def get(self):
+    def get_raw(self):
         self.ONE_SHOT()
         self.irq_v[0] = self.int16(self.get2reg(LIS2MDL_OUTX_L_REG))
         self.irq_v[1] = self.int16(self.get2reg(LIS2MDL_OUTY_L_REG))
         self.irq_v[2] = self.int16(self.get2reg(LIS2MDL_OUTZ_L_REG))
         return self.irq_v
+
