@@ -25,8 +25,8 @@ class LIS2DW12():
         self.oneshot = False
         self.irq_v = [0, 0, 0]
         self._power = 0x20
-        # ODR=2 MODE=0 LP=1
-        self.setreg(LIS2DW12_CTRL1, 0x21)
+        # ODR=5 MODE=0 LP=1
+        self.setreg(LIS2DW12_CTRL1, 0x51)
         # BDU=1
         self.setreg(LIS2DW12_CTRL2, 0x0C)
         # SLP_MODE_SEL=1
@@ -67,7 +67,7 @@ class LIS2DW12():
         if self.oneshot:
             self.r_w_reg(LIS2DW12_CTRL3, 1, 0xFE)
             while 1:
-                if self.getreg(LIS2DW12_CTRL1) & 0x01:
+                if (self.getreg(LIS2DW12_CTRL3) & 0x01) == 0:
                     return
 
     def x(self):
