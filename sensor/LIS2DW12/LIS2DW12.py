@@ -70,15 +70,15 @@ class LIS2DW12():
                 if (self.getreg(LIS2DW12_CTRL3) & 0x01) == 0:
                     return
 
-    def x(self):
+    def x_raw(self):
         self.ONE_SHOT()
         return self.int16(self.get2reg(LIS2DW12_OUT_X_L))>>2
 
-    def y(self):
+    def y_raw(self):
         self.ONE_SHOT()
         return self.int16(self.get2reg(LIS2DW12_OUT_Y_L))>>2
 
-    def z(self):
+    def z_raw(self):
         self.ONE_SHOT()
         return self.int16(self.get2reg(LIS2DW12_OUT_Z_L))>>2
 
