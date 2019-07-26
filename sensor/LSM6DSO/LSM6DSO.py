@@ -42,6 +42,8 @@ class LSM6DSO():
         # scale=2G
         self._scale_a = 0
         self._scale_g = 0
+        self._scale_a_c = 1
+        self._scale_g_c = 1
         self.scale_a('2g')
         self.scale_g('125')
 
@@ -64,23 +66,29 @@ class LSM6DSO():
         self.rb[0] = (self.rb[0] & mask) | dat
         self.setreg(reg, self.rb[0])
 
+    def mg(reg):
+        return self.int16(self.get2reg(reg)) * 0.061 * self._scale_a_c
+    
+    def mdps(reg):
+        return self.int16(self.get2reg(reg)) * 4.375 * self._scale_g_c 
+
     def ax(self):
-        return self.int16(self.get2reg(LSM6DSO_OUTX_L_A))
+        return mg(LSM6DSO_OUTX_L_A)
 
     def ay(self):
-        return self.int16(self.get2reg(LSM6DSO_OUTY_L_A))
+        return mg(LSM6DSO_OUTY_L_A)
 
     def az(self):
-        return self.int16(self.get2reg(LSM6DSO_OUTZ_L_A))
+        return mg(LSM6DSO_OUTZ_L_A)
 
     def gx(self):
-        return self.int16(self.get2reg(LSM6DSO_OUTX_L_G))
+        return mdps(LSM6DSO_OUTX_L_G)
 
     def gy(self):
-        return self.int16(self.get2reg(LSM6DSO_OUTY_L_G))
+        return mdps(LSM6DSO_OUTY_L_G)
 
     def gz(self):
-        return self.int16(self.get2reg(LSM6DSO_OUTZ_L_G))
+        return mdps(LSM6DSO_OUTZ_L_G)
 
     def get_a(self):
         self.irq_v[0][0] = self.ax()
@@ -117,6 +125,7 @@ class LSM6DSO():
             if type(dat) is str:
                 if not dat in LSM6DSO_SCALEA: return
                 self._scale_a = LSM6DSO_SCALEA.index(dat)
+                self._scale_a_c = int(dat.rstrip('g'))//2
             else: return
             self.r_w_reg(LSM6DSO_CTRL1_XL, self._scale_a<<2, 0xF3)
 
@@ -127,6 +136,7 @@ class LSM6DSO():
             if type(dat) is str:
                 if not dat in LSM6DSO_SCALEG: return
                 self._scale_g = LSM6DSO_SCALEG.index(dat)
+                self._scale_g_c = int(dat)//125
             else: return
             self.r_w_reg(LSM6DSO_CTRL2_G, self._scale_g<<1, 0xF1)
 
