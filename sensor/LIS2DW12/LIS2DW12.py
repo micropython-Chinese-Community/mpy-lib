@@ -82,11 +82,33 @@ class LIS2DW12():
         self.ONE_SHOT()
         return self.int16(self.get2reg(LIS2DW12_OUT_Z_L))>>2
 
-    def get(self):
+    def get_raw(self):
         self.ONE_SHOT()
         self.irq_v[0] = self.int16(self.get2reg(LIS2DW12_OUT_X_L))>>2
         self.irq_v[1] = self.int16(self.get2reg(LIS2DW12_OUT_Y_L))>>2
         self.irq_v[2] = self.int16(self.get2reg(LIS2DW12_OUT_Z_L))>>2
+        return self.irq_v
+
+    def mg(self, reg):
+        return round(self.int16(self.get2reg(reg)) * 0.061 * (1 << self._scale))
+
+    def x(self):
+        self.ONE_SHOT()
+        return self.mg(LIS2DW12_OUT_X_L)
+
+    def y(self):
+        self.ONE_SHOT()
+        return self.mg(LIS2DW12_OUT_Y_L)
+
+    def z(self):
+        self.ONE_SHOT()
+        return self.mg(LIS2DW12_OUT_Z_L)
+
+    def get(self):
+        self.ONE_SHOT()
+        self.irq_v[0] = self.mg(LIS2DW12_OUT_X_L)
+        self.irq_v[1] = self.mg(LIS2DW12_OUT_Y_L)
+        self.irq_v[2] = self.mg(LIS2DW12_OUT_Z_L)
         return self.irq_v
 
     def temperature(self):
