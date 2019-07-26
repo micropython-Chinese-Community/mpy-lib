@@ -66,6 +66,24 @@ class LSM6DSO():
         self.rb[0] = (self.rb[0] & mask) | dat
         self.setreg(reg, self.rb[0])
 
+    def ax_raw(self):
+        return self.int16(self.get2reg(LSM6DSO_OUTX_L_A))
+
+    def ay_raw(self):
+        return self.int16(self.get2reg(LSM6DSO_OUTY_L_A))
+
+    def az_raw(self):
+        return self.int16(self.get2reg(LSM6DSO_OUTZ_L_A))
+
+    def gx_raw(self):
+        return self.int16(self.get2reg(LSM6DSO_OUTX_L_G))
+
+    def gy_raw(self):
+        return self.int16(self.get2reg(LSM6DSO_OUTY_L_G))
+
+    def gz_raw(self):
+        return self.int16(self.get2reg(LSM6DSO_OUTZ_L_G))
+
     def mg(reg):
         return self.int16(self.get2reg(reg)) * 0.061 * self._scale_a_c
     
