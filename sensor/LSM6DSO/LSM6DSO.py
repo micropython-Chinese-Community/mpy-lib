@@ -85,10 +85,10 @@ class LSM6DSO():
         return self.int16(self.get2reg(LSM6DSO_OUTZ_L_G))
 
     def mg(reg):
-        return self.int16(self.get2reg(reg)) * 0.061 * self._scale_a_c
-    
+        return round(self.int16(self.get2reg(reg)) * 0.061 * self._scale_a_c)
+
     def mdps(reg):
-        return self.int16(self.get2reg(reg)) * 4.375 * self._scale_g_c 
+        return round(self.int16(self.get2reg(reg)) * 4.375 * self._scale_g_c) 
 
     def ax(self):
         return mg(LSM6DSO_OUTX_L_A)
