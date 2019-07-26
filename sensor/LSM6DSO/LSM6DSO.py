@@ -84,29 +84,29 @@ class LSM6DSO():
     def gz_raw(self):
         return self.int16(self.get2reg(LSM6DSO_OUTZ_L_G))
 
-    def mg(reg):
+    def mg(self, reg):
         return round(self.int16(self.get2reg(reg)) * 0.061 * self._scale_a_c)
 
-    def mdps(reg):
+    def mdps(self, reg):
         return round(self.int16(self.get2reg(reg)) * 4.375 * self._scale_g_c) 
 
     def ax(self):
-        return mg(LSM6DSO_OUTX_L_A)
+        return self.mg(LSM6DSO_OUTX_L_A)
 
     def ay(self):
-        return mg(LSM6DSO_OUTY_L_A)
+        return self.mg(LSM6DSO_OUTY_L_A)
 
     def az(self):
-        return mg(LSM6DSO_OUTZ_L_A)
+        return self.mg(LSM6DSO_OUTZ_L_A)
 
     def gx(self):
-        return mdps(LSM6DSO_OUTX_L_G)
+        return self.mdps(LSM6DSO_OUTX_L_G)
 
     def gy(self):
-        return mdps(LSM6DSO_OUTY_L_G)
+        return self.mdps(LSM6DSO_OUTY_L_G)
 
     def gz(self):
-        return mdps(LSM6DSO_OUTZ_L_G)
+        return self.mdps(LSM6DSO_OUTZ_L_G)
 
     def get_a(self):
         self.irq_v[0][0] = self.ax()
@@ -123,6 +123,23 @@ class LSM6DSO():
     def get(self):
         self.get_a()
         self.get_g()
+        return self.irq_v
+
+    def get_a_raw(self):
+        self.irq_v[0][0] = self.ax_raw()
+        self.irq_v[0][1] = self.ay_raw()
+        self.irq_v[0][2] = self.az_raw()        
+        return self.irq_v[0]
+
+    def get_g(self):
+        self.irq_v[1][0] = self.gx_raw()
+        self.irq_v[1][1] = self.gy_raw()
+        self.irq_v[1][2] = self.gz_raw()        
+        return self.irq_v[1]
+
+    def get(self):
+        self.get_a_raw()
+        self.get_g_raw()
         return self.irq_v
 
     def temperature(self):
