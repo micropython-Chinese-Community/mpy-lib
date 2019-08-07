@@ -10,7 +10,7 @@
 from machine import I2C
 import time
 
-l = LCD1620(I2C(1))
+l = LCD1602(I2C(1))
 l.puts("Hello microbit!")
 n = 0
 while 1:

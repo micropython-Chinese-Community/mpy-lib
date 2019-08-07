@@ -12,7 +12,7 @@ from machine import I2C
 
 LCD_I2C_ADDR=const(63)
 
-class LCD1620():
+class LCD1602():
     def __init__(self, i2c):
         self.i2c=i2c
         self.buf = bytearray(1)
