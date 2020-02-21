@@ -4,42 +4,39 @@
     Author: shaoziyang
     Date:   2018.2
 
-    http://www.micropython.org.cn
+    https://www.micropython.org.cn
 
 '''
-import time
+from time import sleep_ms
 from machine import I2C
 
 LCD_I2C_ADDR=const(63)
 
 class LCD1602():
-    def __init__(self, i2c):
+    def __init__(self, i2c, addr = 0):
         self.i2c=i2c
         self.buf = bytearray(1)
-        self.BK = 0x08
-        self.RS = 0x00
-        self.E = 0x04
+        self.BK, self.RS, self.E = 0x08, 0x00, 0x04
+        self.ADDR = addr if addr else self.autoaddr()
         self.setcmd(0x33)
-        time.sleep_ms(5)
+        sleep_ms(5)
         self.send(0x30)
-        time.sleep_ms(5)
+        sleep_ms(5)
         self.send(0x20)
-        time.sleep_ms(5)
-        self.setcmd(0x28)
-        self.setcmd(0x0C)
-        self.setcmd(0x06)
-        self.setcmd(0x01)
-        self.version='1.0'
+        sleep_ms(5)
+        for i in [0x28, 0x0C, 0x06, 0x01]:
+            self.setcmd(i)
+        self.px, self.py = 0, 0
+        self.pb = bytearray(' '*16)
+        self.version='2.0'
 
     def setReg(self, dat):
         self.buf[0] = dat
-        self.i2c.writeto(LCD_I2C_ADDR, self.buf)
+        self.i2c.writeto(self.ADDR, self.buf)
         time.sleep_ms(1)
 
     def send(self, dat):
-        d=dat&0xF0
-        d|=self.BK
-        d|=self.RS
+        d=(dat&0xF0)|self.BK|self.RS
         self.setReg(d)
         self.setReg(d|0x04)
         self.setReg(d)
@@ -53,6 +50,15 @@ class LCD1602():
         self.RS=1
         self.send(dat)
         self.send(dat<<4)
+
+    def autoaddr(self):
+        for i in (32, 63):
+            try:
+                if self.i2c.readfrom(i, 1):
+                    return i
+            except:
+                pass
+        raise Exception('I2C address detect error!')
 
     def clear(self):
         self.setcmd(1)
@@ -81,12 +87,38 @@ class LCD1602():
             a=0x80
             if y>0:
                 a=0xC0
-            a+=x
-            self.setcmd(a)
+            self.setcmd(a+x)
         self.setdat(ch)
 
     def puts(self, s, x=0, y=0):
+        if type(s) is not str:
+            s = str(s)
         if len(s)>0:
             self.char(ord(s[0]),x,y)
             for i in range(1, len(s)):
                 self.char(ord(s[i]))
+
+    def newline(self):
+        self.px = 0
+        if self.py < 1:
+            self.py += 1
+        else:
+            for i in range(16):
+                self.char(self.pb[i], i)
+                self.char(32, i, 1)
+                self.pb[i] = 32
+
+    def print(self, s):
+        if type(s) is not str:
+            s = str(s)
+        for i in range(len(s)):
+            d = ord(s[i])
+            if d == ord('\n'):
+                self.newline()
+            else:
+                self.char(d, self.px, self.py)
+                if self.py:
+                    self.pb[self.px] = d
+                self.px += 1
+                if self.px > 15:
+                    self.newline()
