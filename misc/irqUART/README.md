@@ -21,7 +21,7 @@ irqUART may wakeup mcu from sleep mode.
 * **uart**: uart object
 * **rx_pin**: uart rxd pin
 * **rx_irq**: user rxd irq, it can be None when not use rxd irq
-* **frame_irq**: user frame irq, it can be None if not use it
+* **frame_irq**: user frame irq. Frame irq will be trigger when no new data and exceeding the specified time. It can be None if not use it
 * **CHR_TMO**: rxd irq delay (ms) after rx_pin irq, it depond on baudrate, rxbuf etc.
 * **FRAME_TMO**: frame irq delay (ms) after last char
 
