@@ -7,7 +7,7 @@
     https://www.micropython.org.cn
 
 '''
-from time import sleep_ms
+from utime import sleep_ms
 from machine import I2C
 
 LCD_I2C_ADDR=const(63)
@@ -33,7 +33,7 @@ class LCD1602():
     def setReg(self, dat):
         self.buf[0] = dat
         self.i2c.writeto(self.ADDR, self.buf)
-        time.sleep_ms(1)
+        sleep_ms(1)
 
     def send(self, dat):
         d=(dat&0xF0)|self.BK|self.RS
