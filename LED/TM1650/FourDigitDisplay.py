@@ -7,6 +7,7 @@
     http://www.micropython.org.cn
 
 '''
+from micropython import const
 from machine import I2C
 
 COMMAND_I2C_ADDRESS = const(0x24)
