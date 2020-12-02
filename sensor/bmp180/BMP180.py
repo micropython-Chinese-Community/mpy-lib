@@ -7,14 +7,17 @@
     http://www.micropython.org.cn
 
 """
-import time
+import utime
 from machine import I2C
+from micropython import const
 
 BMP180_I2C_ADDR = const(0x77)
 
 class BMP180():
     def __init__(self, i2c):
         self.i2c = i2c
+        self.tb = bytearray(1)
+        self.rb = bytearray(1)
         self.AC1 = self.short(self.get2Reg(0xAA))
         self.AC2 = self.short(self.get2Reg(0xAC))
         self.AC3 = self.short(self.get2Reg(0xAE))
@@ -40,27 +43,25 @@ class BMP180():
 
     # set reg
     def	setReg(self, reg, dat):
-        self.i2c.writeto(BMP180_I2C_ADDR, bytearray([reg, dat]))
-		
+        self.tb[0] = dat
+        self.i2c.writeto_mem(BMP180_I2C_ADDR, reg, self.tb)
+
     # get reg
     def	getReg(self, reg):
-        self.i2c.writeto(BMP180_I2C_ADDR, bytearray([reg]))
-        t =	self.i2c.readfrom(BMP180_I2C_ADDR, 1)
-        return t[0]
-	
+        self.i2c.readfrom_mem_into(BMP180_I2C_ADDR, reg, self.rb)
+        return self.rb[0]
+
     # get two reg
     def	get2Reg(self, reg):
-        self.i2c.writeto(BMP180_I2C_ADDR, bytearray([reg]))
-        t =	self.i2c.readfrom(BMP180_I2C_ADDR, 2)
-        return t[0]*256 + t[1]
+        return self.getReg(reg+1) + self.getReg(reg) * 256
 
     # start measure
     def measure(self):
         self.setReg(0xF4, 0x2E)
-        time.sleep_ms(5)
+        utime.sleep_ms(5)
         self.UT = self.get2Reg(0xF6)
         self.setReg(0xF4, 0x34)
-        time.sleep_ms(5)
+        utime.sleep_ms(5)
         self.UP = self.get2Reg(0xF6)
 
     # get Temperature and Pressure
@@ -94,12 +95,12 @@ class BMP180():
     def getTemp(self):
         self.get()
         return self.T
-        
+
     # get Pressure in Pa
     def getPress(self):
         self.get()
         return self.P
-    
+
     # Calculating absolute altitude
     def getAltitude(self):
         return 44330*(1-(self.getPress()/101325)**(1/5.255))
