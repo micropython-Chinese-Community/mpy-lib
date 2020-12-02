@@ -7,6 +7,7 @@
     http://www.micropython.org.cn
 
 '''
+from micropython import const
 from machine import I2C
 
 BMP280_I2C_ADDR = const(0x76)
@@ -14,6 +15,8 @@ BMP280_I2C_ADDR = const(0x76)
 class BMP280():
     def __init__(self, i2c):
         self.i2c = i2c
+        self.tb = bytearray(1)
+        self.rb = bytearray(1)
         self.dig_T1 = self.get2Reg(0x88)
         self.dig_T2 = self.short(self.get2Reg(0x8A))
         self.dig_T3 = self.short(self.get2Reg(0x8C))
@@ -41,22 +44,20 @@ class BMP280():
             return dat - 65536
         else:
             return dat
-	
+
     # set reg
     def	setReg(self, reg, dat):
-        self.i2c.writeto(BMP280_I2C_ADDR, bytearray([reg, dat]))
-		
+        self.tb[0] = dat
+        self.i2c.writeto_mem(BMP280_I2C_ADDR, reg, self.tb)
+
     # get reg
     def	getReg(self, reg):
-        self.i2c.writeto(BMP280_I2C_ADDR, bytearray([reg]))
-        t =	self.i2c.readfrom(BMP280_I2C_ADDR, 1)
-        return t[0]
-	
+        self.i2c.readfrom_mem_into(BMP280_I2C_ADDR, reg, self.rb)
+        return self.rb[0]
+
     # get two reg
     def	get2Reg(self, reg):
-        self.i2c.writeto(BMP280_I2C_ADDR, bytearray([reg]))
-        t =	self.i2c.readfrom(BMP280_I2C_ADDR, 2)
-        return t[0] + t[1]*256
+        return self.getReg(reg) + self.getReg(reg+1) * 256
 
     def get(self):
         adc_T = (self.getReg(0xFA)<<12) + (self.getReg(0xFB)<<4) + (self.getReg(0xFC)>>4)
