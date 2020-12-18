@@ -6,37 +6,37 @@
 
     http://www.micropython.org.cn
 '''
-from machine import I2C, Pin
+from micropython import const
 
-DS1307_I2C_ADDRESS  = (104)
-DS1307_REG_SECOND   = (0)
-DS1307_REG_MINUTE   = (1)
-DS1307_REG_HOUR     = (2)
-DS1307_REG_WEEKDAY  = (3)
-DS1307_REG_DAY      = (4)
-DS1307_REG_MONTH    = (5)
-DS1307_REG_YEAR     = (6)
-DS1307_REG_CTRL     = (7)
-DS1307_REG_RAM      = (8)
+DS1307_I2C_ADDRESS  = const(104)
+DS1307_REG_SECOND   = const(0)
+DS1307_REG_MINUTE   = const(1)
+DS1307_REG_HOUR     = const(2)
+DS1307_REG_WEEKDAY  = const(3)
+DS1307_REG_DAY      = const(4)
+DS1307_REG_MONTH    = const(5)
+DS1307_REG_YEAR     = const(6)
+DS1307_REG_CTRL     = const(7)
+DS1307_REG_RAM      = const(8)
 
 class DS1307():
     def __init__(self, i2c):
         self.i2c = i2c
+        self.DT = [0] * 8
+        self.buf = bytearray(8)
+        self.tb = bytearray(1)
+        self.rb = bytearray(1)
+        self.start()
 
     # set reg
     def	setReg(self, reg, dat):
-        buf	= bytearray(2)
-        buf[0] = reg
-        buf[1] = dat
-        self.i2c.writeto(DS1307_I2C_ADDRESS, buf)
+        self.tb[0] = dat
+        self.i2c.writeto_mem(DS1307_I2C_ADDRESS, reg, self.tb)
 
     # get reg
     def	getReg(self, reg):
-        buf	= bytearray(1)
-        buf[0] = reg
-        self.i2c.writeto(DS1307_I2C_ADDRESS, buf)
-        t =	self.i2c.readfrom(DS1307_I2C_ADDRESS, 1)
-        return t[0]
+        self.i2c.readfrom_mem_into(DS1307_I2C_ADDRESS, reg, self.rb)
+        return self.rb[0]
 
     def start(self):
         t = self.getReg(DS1307_REG_SECOND)
@@ -52,69 +52,66 @@ class DS1307():
     def HexToDec(self, dat):
         return (dat//16) * 10 + (dat%16)
 
-    def DateTime(self, DT=None):
+    def datetime(self, DT=None):
         if DT == None:
-            self.i2c.writeto(DS1307_I2C_ADDRESS, bytearray([0]))
-            buf = self.i2c.readfrom(DS1307_I2C_ADDRESS, 7)
-            DT = [0] * 8
-            DT[0] = self.HexToDec(buf[6]) + 2000
-            DT[1] = self.HexToDec(buf[5])
-            DT[2] = self.HexToDec(buf[4])
-            DT[3] = self.HexToDec(buf[3])
-            DT[4] = self.HexToDec(buf[2])
-            DT[5] = self.HexToDec(buf[1])
-            DT[6] = self.HexToDec(buf[0])
-            DT[7] = 0
-            return DT
+            self.i2c.readfrom_mem_into(DS1307_I2C_ADDRESS, DS1307_REG_SECOND, self.buf)
+            self.DT[0] = self.HexToDec(self.buf[6]) + 2000
+            self.DT[1] = self.HexToDec(self.buf[5])
+            self.DT[2] = self.HexToDec(self.buf[4])
+            self.DT[3] = self.HexToDec(self.buf[3])
+            self.DT[4] = self.HexToDec(self.buf[2])
+            self.DT[5] = self.HexToDec(self.buf[1])
+            self.DT[6] = self.HexToDec(self.buf[0])
+            self.DT[7] = 0
+            return self.DT
         else:
-            buf = bytearray(8)
-            buf[0] = 0
-            buf[1] = self.DecToHex(DT[6]%60)    # second
-            buf[2] = self.DecToHex(DT[5]%60)    # minute
-            buf[3] = self.DecToHex(DT[4]%24)    # hour
-            buf[4] = self.DecToHex(DT[3]%8)     # week day
-            buf[5] = self.DecToHex(DT[2]%32)    # date
-            buf[6] = self.DecToHex(DT[1]%13)    # month
-            buf[7] = self.DecToHex(DT[0]%100)   # year
-            self.i2c.writeto(DS1307_I2C_ADDRESS, buf) 
+            self.buf[0] = 0
+            self.buf[1] = self.DecToHex(DT[6]%60)    # second
+            self.buf[2] = self.DecToHex(DT[5]%60)    # minute
+            self.buf[3] = self.DecToHex(DT[4]%24)    # hour
+            self.buf[4] = self.DecToHex(DT[3]%8)     # week day
+            self.buf[5] = self.DecToHex(DT[2]%32)    # date
+            self.buf[6] = self.DecToHex(DT[1]%13)    # month
+            self.buf[7] = self.DecToHex(DT[0]%100)   # year
+            self.i2c.writeto(DS1307_I2C_ADDRESS, self.buf) 
 
-    def Year(self, year = None):
+    def year(self, year = None):
         if year == None:
             return self.HexToDec(self.getReg(DS1307_REG_YEAR)) + 2000
         else:
             self.setReg(DS1307_REG_YEAR, self.DecToHex(year%100))
 
-    def Month(self, month = None):
+    def month(self, month = None):
         if month == None:
             return self.HexToDec(self.getReg(DS1307_REG_MONTH))
         else:
             self.setReg(DS1307_REG_MONTH, self.DecToHex(month%13))
             
-    def Day(self, day = None):
+    def day(self, day = None):
         if day == None:
             return self.HexToDec(self.getReg(DS1307_REG_DAY))
         else:
             self.setReg(DS1307_REG_DAY, self.DecToHex(day%32))
 
-    def Weekday(self, weekday = None):
+    def weekday(self, weekday = None):
         if weekday == None:
             return self.HexToDec(self.getReg(DS1307_REG_WEEKDAY))
         else:
             self.setReg(DS1307_REG_WEEKDAY, self.DecToHex(weekday%8))
 
-    def Hour(self, hour = None):
+    def hour(self, hour = None):
         if hour == None:
             return self.HexToDec(self.getReg(DS1307_REG_HOUR))
         else:
             self.setReg(DS1307_REG_HOUR, self.DecToHex(hour%24))
 
-    def Minute(self, minute = None):
+    def minute(self, minute = None):
         if minute == None:
             return self.HexToDec(self.getReg(DS1307_REG_MINUTE))
         else:
             self.setReg(DS1307_REG_MINUTE, self.DecToHex(minute%60))
 
-    def Second(self, second = None):
+    def second(self, second = None):
         if second == None:
             return self.HexToDec(self.getReg(DS1307_REG_SECOND))
         else:
@@ -125,5 +122,3 @@ class DS1307():
             return self.getReg(DS1307_REG_RAM + (reg%56))
         else:
             self.setReg(DS1307_REG_RAM + (reg%56), dat)
-
-
