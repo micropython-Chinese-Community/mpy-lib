@@ -5,6 +5,7 @@
 * [DS3231 RTC drive](DS3231)
 * [AT24XX EEPROM drive](AT24XX)
 * [UART with rxd irq](irqUART)
+* [MCP401x 7-Bit Digital POT](MCP401x)
 
 From microbit/micropython Chinese community.  
 www.micropython.org.cn
