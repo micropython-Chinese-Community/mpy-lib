@@ -11,6 +11,7 @@
 * [ST LIS2MDL magnetic sensor](LIS2MDL)
 * [ST LIS2DW12 motion sensor](LIS2DW12)
 * [ST LSM6DSO 3D accelerometer and 3D gyroscope sensor](LSM6DSO)
+* [NTC thermistor](NTC)
 
 From microbit/micropython Chinese community.  
 www.micropython.org.cn
