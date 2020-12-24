@@ -1,3 +1,12 @@
+'''
+    mpy drive for SHT20 Humidity and Temperature Sensor
+
+    Author: shaoziyang
+    Date:   2020.12
+
+    http://www.micropython.org.cn
+
+'''
 from micropython import const
 from time import sleep_ms
 
