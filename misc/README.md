@@ -6,6 +6,7 @@
 * [AT24XX EEPROM drive](AT24XX)
 * [UART with rxd irq](irqUART)
 * [MCP401x 7-Bit Digital POT](MCP401x)
+* [PCF8653 RTC drive](pcf8653)
 
 From microbit/micropython Chinese community.  
 www.micropython.org.cn
