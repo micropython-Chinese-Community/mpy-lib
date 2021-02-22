@@ -1,6 +1,6 @@
 from micropython import const
 
-class MCP4018:
+class MCP401x:
 
     def __init__(self, i2c, addr = 47):
         self.i2c = i2c
