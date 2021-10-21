@@ -52,7 +52,7 @@ class LCD1602():
         self.send(dat<<4)
 
     def autoaddr(self):
-        for i in (32, 63):
+        for i in range(32, 63):
             try:
                 if self.i2c.readfrom(i, 1):
                     return i
