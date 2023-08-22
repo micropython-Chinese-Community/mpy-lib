@@ -7,7 +7,6 @@
     http://www.micropython.org.cn
 
 '''
-from micropython import const
 from machine import I2C
 
 class BMP280():
