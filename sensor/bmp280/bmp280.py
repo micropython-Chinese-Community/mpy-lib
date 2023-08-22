@@ -10,11 +10,15 @@
 from micropython import const
 from machine import I2C
 
-BMP280_I2C_ADDR = const(0x76)
-
 class BMP280():
-    def __init__(self, i2c):
+    def __init__(self, i2c, addr = 0x76, SDO = None):
         self.i2c = i2c
+        if SDO == None:
+            self.addr = addr
+        elif SDO:
+            self.addr = 0x77
+        else:
+            self.addr = 0x76
         self.tb = bytearray(1)
         self.rb = bytearray(1)
         self.dig_T1 = self.get2Reg(0x88)
@@ -39,24 +43,24 @@ class BMP280():
         self.P = 0
         self.version = '1.0'
 
-    def	short(self,	dat):
+    def short(self, dat):
         if dat > 32767:
             return dat - 65536
         else:
             return dat
 
     # set reg
-    def	setReg(self, reg, dat):
+    def setReg(self, reg, dat):
         self.tb[0] = dat
-        self.i2c.writeto_mem(BMP280_I2C_ADDR, reg, self.tb)
+        self.i2c.writeto_mem(self.addr, reg, self.tb)
 
     # get reg
-    def	getReg(self, reg):
-        self.i2c.readfrom_mem_into(BMP280_I2C_ADDR, reg, self.rb)
+    def getReg(self, reg):
+        self.i2c.readfrom_mem_into(self.addr, reg, self.rb)
         return self.rb[0]
 
     # get two reg
-    def	get2Reg(self, reg):
+    def get2Reg(self, reg):
         return self.getReg(reg) + self.getReg(reg+1) * 256
 
     def get(self):
@@ -95,7 +99,7 @@ class BMP280():
         return self.P
 
     # Calculating absolute altitude
-    def	getAltitude(self):
+    def getAltitude(self):
         return 44330*(1-(self.getPress()/101325)**(1/5.255))
 
     # sleep mode
@@ -105,4 +109,3 @@ class BMP280():
     # normal mode
     def poweron(self):
         self.setReg(0xF4, 0x2F)
-
