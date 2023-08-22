@@ -15,7 +15,34 @@ TM1637_CMD2 = (192) # 0xC0 address command
 TM1637_CMD3 = (128) # 0x80 display control command
 TM1637_DELAY = (10) # 10us delay between clk/dio pulses
 
-_SEGMENTS = (0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F,0x77,0x7C,0x39,0x5E,0x79,0x71)
+
+'''
+0x00-0x0F
+0x10-0x1F
+0x20-0x2F
+0x30-0x39 0 ~ 9
+0x3A-0x40
+0x41-0x5A A - Z
+0x5B-0x60
+'''
+_FONT1 = b'\
+\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\
+\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\
+\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x40\x00\x00\
+\x3F\x06\x5B\x4F\x66\x6D\x7D\x07\x7F\x6F\
+\x00\x00\x00\x00\x00\x00\x00\
+\x77\x7C\x39\x5E\x79\x71\x3D\x76\x00\x0E\x00\x38\x00\x54\x5C\x73\x67\x00\x00\x78\x3E\x1C\x00\x00\x00\x00\x00\
+\x00\x00\x00\x00\x08\x00\
+'
+_FONT2 = b'\
+\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\
+\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\
+\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x40\x00\x00\
+\x3F\x30\x5B\x79\x74\x6D\x6F\x38\x7F\x7D\
+\x00\x00\x00\x00\x00\x00\x00\
+\x7E\x67\x0F\x73\x4F\x4E\x2F\x76\x00\x31\x00\x07\x00\x62\x63\x5E\x7C\x00\x00\x47\x37\x23\x00\x00\x00\x00\x00\
+\x00\x00\x00\x00\x01\x00\
+'
 
 class TM1637():
     def __init__(self, clk, dio, intensity=7, number = 4):
@@ -23,9 +50,11 @@ class TM1637():
         self.dio = dio
 
         self._intensity = intensity%8
-        self._LED = number
+        self._LEDS = number
         self._ON = 8
-        self.dbuf = [0, 0, 0, 0]
+        self.dbuf = [0]*number
+        self._reverse = False
+        self.FONT = _FONT1
 
         self.clk.init(Pin.OUT, value=0)
         self.dio.init(Pin.OUT, value=0)
@@ -93,50 +122,45 @@ class TM1637():
             self._write_data_cmd()
             self._write_dsp_ctrl()
 
-    def _dat(self, bit, dat):
+    def reverse(self, reverse=False):
+        self._reverse = reverse
+        if reverse:
+            self.FONT = _FONT2
+        else:
+            self.FONT = _FONT1
+        
+    def dat(self, dat, bit=0):
+        if self._reverse:
+            bit = self._LEDS - bit - 1
         self._write_data_cmd()
         self._start()
-        self._write_byte(TM1637_CMD2 | (bit%self._LED))
+        self._write_byte(TM1637_CMD2 | (bit%self._LEDS))
         self._write_byte(dat)
         self._stop()
         self._write_dsp_ctrl()
 
     def clear(self):
-        self._dat(0, 0)
-        self._dat(1, 0)
-        self._dat(2, 0)
-        self._dat(3, 0)
-        self.dbuf = [0, 0, 0, 0]
+        for i in range(self._LEDS):
+            self.dat(0, i)
+            self.dbuf[i] = 0
 
-    def showbit(self, num, bit = 0):
-        self.dbuf[bit%self._LED] = _SEGMENTS[num%16]
-        self._dat(bit, _SEGMENTS[num%16])
-
-    def showDP(self, bit = 1, show = True):
-        bit = bit%self._LED
+    def showDP(self, show = True, bit = 1):
+        bit = bit%self._LEDS
         if show:
-            self._dat(bit, self.dbuf[bit] | 0x80)
+            self.dat(self.dbuf[bit] | 0x80, bit)
         else:
-            self._dat(bit, self.dbuf[bit] & 0x7F)
+            self.dat(self.dbuf[bit] & 0x7F, bit)
+
+    def show(self, s):
+        _s = s.upper()
+        for i in range(self._LEDS):
+            if i < len(_s):
+                self.dbuf[i] = self.FONT[min(0x60, ord(_s[i]))]
+            else:
+                self.dbuf[i] = 0
+            self.dat(self.dbuf[i], i)
 
     def shownum(self, num):
-        if num < 0:
-            self._dat(0, 0x40)   # '-'
-            num = -num
-        else:
-            self.showbit((num // 1000) % 10)
-        self.showbit(num % 10, 3)
-        self.showbit((num // 10) % 10, 2)
-        self.showbit((num // 100) % 10, 1)
-
-    def showhex(self, num):
-        if num < 0:
-            self._dat(0, 0x40)   # '-'
-            num = -num
-        else:
-            self.showbit((num >> 12) % 16)
-        self.showbit(num % 16, 3)
-        self.showbit((num >> 4) % 16, 2)
-        self.showbit((num >> 8) % 16, 1)
+        self.show(str(num))
 
 
