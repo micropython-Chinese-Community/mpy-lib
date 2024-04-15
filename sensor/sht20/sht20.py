@@ -49,8 +49,8 @@ class SHT20():
         self.measure(0xf3, 85)
         return self.ht[0]*256+self.ht[1]
 
-    def humi(self, raw):
-        return (125*raw//65536) -6
+    def humi(self):
+        return (125*self.humi_raw()//65536) -6
 
-    def temperature(self, raw):
-        return 175.72*raw/65536 - 46.85
+    def temperature(self):
+        return 175.72*self.temperature_raw()/65536 - 46.85
