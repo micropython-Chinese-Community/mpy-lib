@@ -98,6 +98,10 @@ class OLED12864_I2C():
         if self._DRAW:
             self.set_pos()
             self.i2c.writeto(self.ADDR, screen)
+    
+    def zoom(self, z=1):
+        d = 1 if z else 0
+        self.command([0xD6,d])
 
     def line(self, x1, y1, x2, y2, c=1):
         return
