@@ -102,6 +102,10 @@ class OLED12864_I2C():
     def zoom(self, z=1):
         d = 1 if z else 0
         self.command([0xD6,d])
+        
+    def rotate(self, rotate=1):
+        self.command([0xC0 | ((rotate & 1) << 3)])
+        self.command([0xA0 | (rotate & 1)])
 
     def line(self, x1, y1, x2, y2, c=1):
         return
