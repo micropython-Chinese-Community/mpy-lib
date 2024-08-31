@@ -27,8 +27,8 @@ class LCD1602():
         for i in [0x28, 0x0C, 0x06, 0x01]:
             self.setcmd(i)
         self.px, self.py = 0, 0
-        self.pb = bytearray(' '*16)
-        self.version='2.0'
+        self.pb = bytearray(16)
+        self.version='2.1'
 
     def setReg(self, dat):
         self.buf[0] = dat
