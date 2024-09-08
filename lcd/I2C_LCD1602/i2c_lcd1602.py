@@ -60,6 +60,12 @@ class I2C_LCD1602():
                 pass
         raise Exception('I2C address detect error!')
 
+    def write_cgram(self, buf, reg=0):
+        n = len(buf)
+        self.setcmd(0x40 + (reg%8)*8)
+        for i in range(n):
+            self.setdat(buf[i])
+
     def clear(self):
         self.setcmd(1)
 
