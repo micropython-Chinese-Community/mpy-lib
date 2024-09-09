@@ -7,8 +7,7 @@
     https://www.micropython.org.cn
 
 '''
-from utime import sleep_ms
-from machine import I2C
+from time import sleep_ms
 
 LCD_I2C_ADDR=const(63)
 
