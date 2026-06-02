@@ -1,7 +1,7 @@
 # LIS2DW12 3-axis motion seneor micropython drive
 # ver: 1.0
 # License: MIT
-# Author: shaoziyang (shaoziyang@micropython.org.cn)
+# Author: shaoziyang 
 # v1.0 2019.7
 
 LIS2DW12_CTRL1 = const(0x20)

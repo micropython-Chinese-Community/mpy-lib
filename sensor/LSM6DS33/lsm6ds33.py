@@ -1,7 +1,7 @@
 # LSM6DS33: ST's always-on 3D accelerometer and 3D gyroscope micropython drive
 # ver: 1.0
 # License: MIT
-# Author: shaoziyang (shaoziyang@mail.micropython.org.cn)
+# Author: shaoziyang 
 # v1.0 2019.5
 
 LSM6DS33_ORIENT_CFG_G = const(0x0B)

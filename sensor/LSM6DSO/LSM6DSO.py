@@ -1,7 +1,7 @@
 # LSM6DSO 3D accelerometer and 3D gyroscope seneor micropython drive
 # ver: 1.0
 # License: MIT
-# Author: shaoziyang (shaoziyang@micropython.org.cn)
+# Author: shaoziyang 
 # v1.0 2019.7
 
 LSM6DSO_CTRL1_XL = const(0x10)

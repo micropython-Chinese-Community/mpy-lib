@@ -4,7 +4,7 @@
     Author: shaoziyang
     Date:   2018.2
 
-    http://www.micropython.org.cn
+    https://github.com/shaoziyang
 
 """
 import utime

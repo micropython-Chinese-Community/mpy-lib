@@ -7,4 +7,4 @@
 * [I2C OLED ASCII display drive](OLED_I2C_ASC)
 
 From microbit/micropython Chinese community.  
-www.micropython.org.cn
+https://github.com/shaoziyang

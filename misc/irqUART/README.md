@@ -56,4 +56,4 @@ ui.uart.init(115200)
 If you use uart transmit mass data, you may need to increase uart rxbuf size to avoid data loss.
 
 From microbit/micropython Chinese community.  
-www.micropython.org.cn
+https://github.com/shaoziyang

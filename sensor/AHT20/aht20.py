@@ -4,7 +4,7 @@
     Author: shaoziyang
     Date:   2023.8
 
-    http://www.micropython.org.cn
+    https://github.com/shaoziyang
 
 '''
 from machine import I2C

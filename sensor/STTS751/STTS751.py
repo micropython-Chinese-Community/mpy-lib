@@ -1,7 +1,7 @@
 # STTS751 temperature seneor micropython drive
 # ver: 1.0
 # License: MIT
-# Author: shaoziyang (shaoziyang@micropython.org.cn)
+# Author: shaoziyang 
 # v1.0 2019.7
 
 STTS751_RESOLUTION = (8, 0, 4, 12, 10, 11, 9, 12)

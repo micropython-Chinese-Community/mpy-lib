@@ -9,4 +9,4 @@
 * [PCF8653 RTC drive](pcf8653)
 
 From microbit/micropython Chinese community.  
-www.micropython.org.cn
+https://github.com/shaoziyang

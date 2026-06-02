@@ -4,7 +4,7 @@
     Author: shaoziyang
     Date:   2020.1
 
-    https://www.micropython.org.cn
+    https://github.com/shaoziyang
 
 '''
 from micropython import const

@@ -4,7 +4,7 @@
     Author: shaoziyang
     Date:   2024.4
 
-    http://www.micropython.org.cn
+    https://github.com/shaoziyang
 
 '''
 import math

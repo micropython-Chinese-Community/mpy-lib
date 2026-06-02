@@ -37,4 +37,4 @@ T2 = NTC_GND(ADC_T2.read_uv()/1000, 3300, B=3950)
 ```
 
 From microbit/micropython Chinese community.  
-www.micropython.org.cn
+https://github.com/shaoziyang

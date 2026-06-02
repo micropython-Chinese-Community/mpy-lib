@@ -25,4 +25,4 @@ oled.text(0, 3, '0123456789')
   
 
 From microbit/micropython Chinese community.  
-www.micropython.org.cn
+https://github.com/shaoziyang

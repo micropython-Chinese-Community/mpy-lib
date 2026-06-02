@@ -89,4 +89,4 @@ Soft Reset
 
 please note, In order to simplify the code, crc8 checksum is ignored.
 
-From [microbit/micropython Chinese community](https://www.micropython.org.cn).  
+From [microbit/micropython Chinese community](https://github.com/shaoziyang).  

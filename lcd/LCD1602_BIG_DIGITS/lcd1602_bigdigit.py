@@ -4,7 +4,7 @@
     Author: shaoziyang
     Date:   2024.9
 
-    https://www.micropython.org.cn
+    https://github.com/shaoziyang
 
 '''
 from i2c_lcd1602 import I2C_LCD1602

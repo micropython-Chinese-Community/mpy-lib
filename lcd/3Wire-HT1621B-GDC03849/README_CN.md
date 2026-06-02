@@ -253,8 +253,8 @@ gdc.viewRH(98.34)
 ```
 
 
-[HT]:http://www.holtek.com.cn
-[DL]:http://www.good-display.cn
+[HT]:https://www.holtek.com.cn
+[DL]:https://www.good-display.cn
 [1]:./DataSheet/HT1621CN.pdf
 [2]:./DataSheet/GDC03849C1P6.8.pdf
 [EN]:./README.md

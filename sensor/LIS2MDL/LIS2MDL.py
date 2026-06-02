@@ -1,7 +1,7 @@
 # LIS2MDL magnetic seneor micropython drive
 # ver: 1.0
 # License: MIT
-# Author: shaoziyang (shaoziyang@micropython.org.cn)
+# Author: shaoziyang 
 # v1.0 2019.7
 
 LIS2MDL_CFG_REG_A = const(0x60)

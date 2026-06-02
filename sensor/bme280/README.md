@@ -53,4 +53,4 @@ while True:
 ```
 
 From microbit/micropython Chinese community  
-www.micropython.org.cn
+https://github.com/shaoziyang

@@ -1,7 +1,7 @@
 # LSM303AH: ST's ultra-low-power 3D accelerometer and 3D magnetometer micropython drive
 # ver: 1.0
 # License: MIT
-# Author: shaoziyang (shaoziyang@mail.micropython.org.cn)
+# Author: shaoziyang 
 # v1.0 2019.5
 
 LSM303AH_ADDR_A = const(0x1D)

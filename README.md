@@ -12,4 +12,4 @@ All kinds of micropython drives, examples, libraries.
 * [misc](misc)
 
 From microbit/micropython Chinese community.  
-www.micropython.org.cn
+https://github.com/shaoziyang

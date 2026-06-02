@@ -18,4 +18,4 @@ print(sht.humi(sht.humi_raw()))
 ```
 
 From microbit/micropython Chinese community.  
-www.micropython.org.cn
+https://github.com/shaoziyang

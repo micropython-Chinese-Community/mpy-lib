@@ -4,7 +4,7 @@
     Author: shaoziyang
     Date:   2020.6
 
-    http://www.micropython.org.cn
+    https://github.com/shaoziyang
 '''
 from machine import Pin, UART, Timer
 import sys

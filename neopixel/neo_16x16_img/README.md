@@ -25,4 +25,4 @@ see test.py
 **Please note neopixel display must using external power.**  
 
 From microbit/micropython Chinese community  
-www.micropython.org.cn
+https://github.com/shaoziyang

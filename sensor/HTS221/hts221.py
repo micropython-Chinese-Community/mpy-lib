@@ -1,7 +1,7 @@
 # HTS221 Humidity and temperature micropython drive
 # ver: 2.0
 # License: MIT
-# Author: shaoziyang (shaoziyang@micropython.org.cn)
+# Author: shaoziyang 
 # v1.0 2016.4
 # v2.0 2019.7
 
