@@ -20,16 +20,15 @@ class AHT20:
     def __init__(self, i2c):
         self.i2c = i2c
         self.addr = 56
-        self.tb = bytearray(3)
+        self.tb = bytearray(2)
         self.rb = bytearray(6)
         self._H = 0
         self._T = 0
         self.init()
 
     def set(self, cmd, dat):
-        self.tb[0] = cmd
-        self.tb[1] = dat >> 8
-        self.tb[2] = dat
+        self.tb[0] = dat >> 8
+        self.tb[1] = dat
         self.i2c.writeto_mem(self.addr, cmd, self.tb)
 
     def get(self):
