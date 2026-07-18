@@ -2,6 +2,16 @@
 
 Using 74hc595 to drive LCD1602, supporting SPI and GPIO modes, much faster than I2C.
 
+Pins
+
+- `ST_CP`: storage register clock input, or SPI cs signal.
+- `SH_CP`: shfit register clock input, or SPI sck signal.
+- `DS`: serial data input, or SPI mosi signal.
+- `Q1`: link to LCD1602's RS.
+- `Q2`: link to LCD1602's E.
+- `Q3`: link to a NPN transistor (9014) or N-channel transistor (AO3401), use to control LCD1602 backlight.
+
+
 Usage
 
 ```py
