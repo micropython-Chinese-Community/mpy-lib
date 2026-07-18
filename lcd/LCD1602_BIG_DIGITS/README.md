@@ -4,7 +4,7 @@ Display large font numbers on LCD1602, ported from the [small display BIG DIGITS
 
 **usage**
 
-```
+```py
 from lcd1602_bigdigit import LCD1602_BIGDIGIT
 from machine import I2C, Pin
 from time import sleep_ms

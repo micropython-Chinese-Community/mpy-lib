@@ -2,14 +2,14 @@
 
 All kinds of micropython drives, examples, libraries.
 
-* [LCD](lcd)
-* [LED](LED)
-* [Sensor](sensor)
-* [Neopixel](neopixel)
+* [LCD](lcd/README.md)
+* [LED](LED/README.md)
+* [Sensor](sensor/README.md)
+* [Neopixel](neopixel/README.md)
 * keyboard
 * radio
 * bluetooth
-* [misc](misc)
+* [misc](misc/README.md)
 
 From microbit/micropython Chinese community.  
 https://github.com/shaoziyang
