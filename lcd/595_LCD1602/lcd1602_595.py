@@ -64,6 +64,7 @@ class LCD1602_595:
         self.setcmd(1)
         self.px = 0
         self.py = 0
+        self.pb[:] = b' '*16
 
     def backlight(self, on=1):
         if on:

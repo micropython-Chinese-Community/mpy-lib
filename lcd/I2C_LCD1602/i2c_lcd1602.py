@@ -63,6 +63,7 @@ class I2C_LCD1602():
         self.setcmd(1)
         self.px = 0
         self.py = 0
+        self.pb[:] = b' '*16
 
     def backlight(self, on):
         self.BK = 8 if on else 0
